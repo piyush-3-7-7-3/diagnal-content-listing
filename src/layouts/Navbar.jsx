@@ -4,7 +4,7 @@ import { SearchContext } from '../context/SearchContext';
 import backImage from '../assets/images/back.png';
 import searchImage from '../assets/images/search.png'
 
-const Navbar = () => {
+const Navbar = ({movies, handleSetFilteredMovies}) => {
     const { searchTerm, setSearchTerm } = useContext(SearchContext);
 
     const handleBack = () => {
@@ -12,7 +12,9 @@ const Navbar = () => {
     };
 
     const handleSearch = () => {
-        alert(`Search term: ${searchTerm}`); // Placeholder for search functionality
+        handleSetFilteredMovies(movies.filter((movie) => {
+            return movie.name.toLowerCase().includes(searchTerm.toLowerCase())
+        }))
     };
 
     const handleChange = (event) => {

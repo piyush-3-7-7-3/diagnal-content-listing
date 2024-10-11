@@ -12,7 +12,7 @@ const MoviesContainer = ({ movies }) => {
 
     return (
         <div className="movies-container">
-            {filteredMovies.map((movie, index) => {
+            {movies.map((movie, index) => {
                 return <div className='column' key={`${movie.title}-${index}`}>
                     <MovieCard name={movie.name} posterImage={movie['poster-image']} />
                 </div>

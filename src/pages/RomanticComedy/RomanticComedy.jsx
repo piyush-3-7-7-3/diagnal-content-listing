@@ -1,16 +1,17 @@
 import MoviesContainer from "./Components/MoviesContainer";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import fetchRomanticComedies from "../../services/fetchRomanticComedies";
 import hasMoreItems from "../../utils/hasMoreItems";
+import { SearchContext } from "../../context/SearchContext";
 
 
-const RomanticComedy = () => {
+const RomanticComedy = ({handleSetMovies, filteredMovies, handleSetFilteredMovies}) => {
 
-    const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
+    const {searchTerm} = useContext(SearchContext);
 
     useEffect(() => {
         const getMovies = async () => {
@@ -26,8 +27,19 @@ const RomanticComedy = () => {
                     // Call the utility function to check if there are more items
                     const moreItems = hasMoreItems(totalContentItems, pageSizeRequested, page);
                     setHasMore(moreItems);
-                    setMovies((prev) => [...prev, ...content]);
+                    handleSetMovies((prev) => [...prev, ...content]);
+                    if(searchTerm != ""){
+                        let filteredContent = content.filter((movie) => {
+                            return movie.name.toLowerCase().includes(searchTerm.toLowerCase())
+                        })
+                        handleSetFilteredMovies((prev) => [...prev, ...filteredContent]);
+                    }
+                    else{
+                        handleSetFilteredMovies((prev) => [...prev, ...content]);
+                    }
+                    
                 } catch (err) {
+                    console.log(err)
                     setError('Error in fetching movies');
                 } finally {
                     setLoading(false);
@@ -73,7 +85,7 @@ const RomanticComedy = () => {
     return (
         <div className="romantic-movie-container">
             <div className="movies">
-                <MoviesContainer movies={movies} />
+                <MoviesContainer movies={filteredMovies} />
                 {loading && <p>Loading....</p>}
             </div>
         </div>
