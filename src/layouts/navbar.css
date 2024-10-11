@@ -1,0 +1,31 @@
+
+.navbar {
+    display: flex;
+    justify-content: space-between; /* Space between buttons and search bar */
+    align-items: center; /* Center items vertically */
+    background-color: transparent; /* Navbar background color */
+    padding: 10px 20px; /* Padding for the navbar */
+    color: white; /* Text color */
+}
+
+.search-input {
+    width: 100%; /* Fixed width for the input */
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 25px;
+}
+
+.search-input:focus {
+    outline: none; /* Remove outline */
+    background-color: transparent; /* Ensure background is transparent */
+}
+
+
+.nav-button {
+    background: transparent; /* Transparent background */
+    border: none; /* No border */
+    color: white; /* Button text color */
+    font-size: 18px; /* Button font size */
+    cursor: pointer; /* Pointer cursor on hover */
+}

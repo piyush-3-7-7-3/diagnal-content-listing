@@ -1,0 +1,10 @@
+.thumbnail {
+    width: auto;
+    /* Full width of the column */
+    height: auto;
+    /* Maintain aspect ratio */
+    aspect-ratio: 2 / 3;
+    /* Define the aspect ratio */
+    object-fit: cover;
+    /* Crop to fit within the aspect ratio */
+}
