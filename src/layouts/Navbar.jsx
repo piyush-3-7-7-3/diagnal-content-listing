@@ -1,10 +1,11 @@
 import './navbar.css';
-import { useState } from "react";
+import { useContext } from "react";
+import { SearchContext } from '../context/SearchContext';
 import backImage from '../assets/images/back.png';
 import searchImage from '../assets/images/search.png'
 
 const Navbar = () => {
-    const [searchTerm, setSearchTerm] = useState('');
+    const { searchTerm, setSearchTerm } = useContext(SearchContext);
 
     const handleBack = () => {
         window.history.back(); // Go back to the previous page

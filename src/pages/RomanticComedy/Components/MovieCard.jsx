@@ -1,6 +1,11 @@
 import './movieCard.css';
+import { useContext } from 'react';
+import Highlighter from 'react-highlight-words';
+import { SearchContext } from '../../../context/SearchContext';
 
 const MovieCard = ({ name, posterImage }) => {
+    const { searchTerm } = useContext(SearchContext);
+
     return (
         <>
             <img
@@ -9,7 +14,14 @@ const MovieCard = ({ name, posterImage }) => {
                 alt={name}
                 onError={(e) => { e.target.src = 'https://test.create.diagnal.com/images/placeholder_for_missing_posters.png'; }}  // Fallback image for missing images
             />
-            <h3>{name}</h3>
+            <h3>
+                <Highlighter
+                    highlightClassName="highlight"
+                    searchWords={[searchTerm]}  // Highlighting based on the search term
+                    autoEscape={true}
+                    textToHighlight={name}  // Movie name to highlight
+                />
+            </h3>
         </>
     );
 };

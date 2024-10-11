@@ -37,10 +37,7 @@ const RomanticComedy = () => {
 
         };
         getMovies();
-    }, [page]);
-
-
-
+    }, [page, hasMore]);
 
     const handleInfiniteScroll = () => {
         try {
@@ -68,7 +65,7 @@ const RomanticComedy = () => {
 
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-    }, [loading]); // Pass loading as a dependency
+    }, [loading]); 
 
     if (error) return <p>{error}</p>;
 

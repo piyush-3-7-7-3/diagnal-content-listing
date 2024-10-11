@@ -1,12 +1,14 @@
 import RomanticComedy from "./RomanticComedy/RomanticComedy";
 import Navbar from "../layouts/Navbar";
+import { SearchProvider } from "../context/SearchContext";
+
 const Home = () => {
 
-    return(
-        <>
+    return (
+        <SearchProvider>
             <Navbar />
             <RomanticComedy />
-        </>
+        </SearchProvider>
     );
 };
 
