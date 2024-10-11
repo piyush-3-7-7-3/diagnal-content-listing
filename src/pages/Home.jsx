@@ -3,10 +3,9 @@ import Navbar from "../layouts/Navbar";
 import { SearchProvider } from "../context/SearchContext";
 
 const Home = () => {
-
     return (
         <SearchProvider>
-            <Navbar />
+            <Navbar/>
             <RomanticComedy />
         </SearchProvider>
     );

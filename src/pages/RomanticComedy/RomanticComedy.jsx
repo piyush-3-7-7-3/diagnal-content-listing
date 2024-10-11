@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import fetchRomanticComedies from "../../services/fetchRomanticComedies";
 import hasMoreItems from "../../utils/hasMoreItems";
 
+
 const RomanticComedy = () => {
 
     const [movies, setMovies] = useState([]);
@@ -10,7 +11,7 @@ const RomanticComedy = () => {
     const [error, setError] = useState(null);
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
-    
+
     useEffect(() => {
         const getMovies = async () => {
             if (hasMore) {
@@ -68,7 +69,6 @@ const RomanticComedy = () => {
     }, [loading]); 
 
     if (error) return <p>{error}</p>;
-
 
     return (
         <div className="romantic-movie-container">

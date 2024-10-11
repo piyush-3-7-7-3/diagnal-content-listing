@@ -16,7 +16,7 @@ const Navbar = () => {
     };
 
     const handleChange = (event) => {
-        setSearchTerm(event.target.value); // Update search term state
+        setSearchTerm(event.target.value);
     };
     return (
         <nav className="navbar">
