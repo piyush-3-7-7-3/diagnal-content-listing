@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/diagnal-content-listing/static/css/main.3d9d900f.css",
-    "main.js": "/diagnal-content-listing/static/js/main.9ffa8c46.js",
+    "main.js": "/diagnal-content-listing/static/js/main.b4c84d0f.js",
     "index.html": "/diagnal-content-listing/index.html",
     "main.3d9d900f.css.map": "/diagnal-content-listing/static/css/main.3d9d900f.css.map",
-    "main.9ffa8c46.js.map": "/diagnal-content-listing/static/js/main.9ffa8c46.js.map"
+    "main.b4c84d0f.js.map": "/diagnal-content-listing/static/js/main.b4c84d0f.js.map"
   },
   "entrypoints": [
     "static/css/main.3d9d900f.css",
-    "static/js/main.9ffa8c46.js"
+    "static/js/main.b4c84d0f.js"
   ]
 }
