@@ -10,7 +10,8 @@ body{
 html {
     overflow-x: hidden;
 }
+
 ::-webkit-scrollbar {
-    width: 0;  /* Remove scrollbar space */
+    width: 0px;  /* Remove scrollbar space */
     background: transparent;  /* Optional: just make scrollbar invisible */
 }
