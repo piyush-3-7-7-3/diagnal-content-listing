@@ -1,7 +1,8 @@
-import './movieContainer.css';
 import MovieCard from "./MovieCard";
 import { useContext, useMemo } from 'react';
 import { SearchContext } from '../../../context/SearchContext';
+import Grid from '@mui/material/Grid2';
+
 
 const MoviesContainer = ({ movies }) => {
 
@@ -11,13 +12,13 @@ const MoviesContainer = ({ movies }) => {
     }), [movies, searchTerm])
 
     return (
-        <div className="movies-container">
+        <Grid container rowSpacing={10} spacing={5} marginX={5}>
             {movies.map((movie, index) => {
-                return <div className='column' key={`${movie.title}-${index}`}>
+                return <Grid size={{ xs: 4, lg: 2 }} key={`${movie.title}-${index}`}>
                     <MovieCard name={movie.name} posterImage={movie['poster-image']} />
-                </div>
+                </Grid>
             })}
-        </div>
+        </Grid>
     );
 }
 
