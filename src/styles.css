@@ -28,3 +28,7 @@ span {
     font-weight: 200; 
 }
 
+html, body {
+    overflow-x: hidden; /* Prevent horizontal scrolling on the entire page */
+}
+

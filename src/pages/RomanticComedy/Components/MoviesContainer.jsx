@@ -1,34 +1,32 @@
+// Import necessary components and hooks
 import MovieCard from "./MovieCard";
-import { useContext, useMemo } from 'react';
-import { SearchContext } from '../../../context/SearchContext';
+
+// Import Material UI components
 import Grid from '@mui/material/Grid2';
 import { Typography } from "@mui/material";
 
-
+// Define the MoviesContainer component
 const MoviesContainer = ({ movies }) => {
 
-    const { searchTerm } = useContext(SearchContext);
-    const filteredMovies = useMemo(() => movies.filter((movie) => {
-        return movie.name.toLowerCase().includes(searchTerm.toLowerCase())
-    }), [movies, searchTerm])
-
+    
     return (
         <Grid container rowSpacing={8} spacing={2} marginX={5}>
-        {movies.length === 0 ? (  
-            <Grid xs={12}>  
-                <Typography variant="h6" align="center" justifyContent="center">
-                    No movies found. Please try again later.
-                </Typography>
-            </Grid>
-        ) : (
-            movies.map((movie, index) => (
-                <Grid size={{ xs: 4, lg: 2 }} key={`${movie.title}-${index}`}>
-                    <MovieCard name={movie.name} posterImage={movie['poster-image']} />
+            {movies.length === 0 ? (  // Check if there are no movies
+                <Grid xs={12}>  
+                    <Typography variant="h6" align="center" justifyContent="center">
+                        No movies found. Please try again later.  {/* Message to display when no movies are found */}
+                    </Typography>
                 </Grid>
-            ))
-        )}
-    </Grid>
+            ) : (
+                movies.map((movie, index) => (  // Map over the movies array
+                    <Grid size={{ xs: 4, lg: 2 }} key={`${movie.title}-${index}`}>
+                        <MovieCard name={movie.name} posterImage={movie['poster-image']} /> {/* Render MovieCard for each movie */}
+                    </Grid>
+                ))
+            )}
+        </Grid>
     );
 }
 
+// Export the MoviesContainer component
 export default MoviesContainer;

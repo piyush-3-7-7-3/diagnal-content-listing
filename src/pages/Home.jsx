@@ -1,8 +1,16 @@
-import RomanticComedy from "./RomanticComedy/RomanticComedy";
-import Navbar from "../layouts/Navbar";
-import { SearchProvider } from "../context/SearchContext";
+// Import React hooks
 import { useState } from "react";
 
+// Import context provider
+import { SearchProvider } from "../context/SearchContext";
+
+// Import layout components
+import Navbar from "../layouts/Navbar";
+
+// Import pages/components
+import RomanticComedy from "./RomanticComedy/RomanticComedy";
+
+// Define the Home component
 const Home = () => {
     const [movies, setMovies] = useState([]);
     const [filteredMovies, setFilteredMovies] = useState([]);
@@ -15,4 +23,5 @@ const Home = () => {
     );
 };
 
+// Export the Home component
 export default Home;
