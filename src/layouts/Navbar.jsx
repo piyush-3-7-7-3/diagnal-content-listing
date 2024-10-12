@@ -80,7 +80,7 @@ const Navbar = ({ movies, handleSetFilteredMovies }) => {
                         alignItems: 'center'
                     }}
                 >
-                    <Typography variant="h5"> {/* Adjust the variant as needed */}
+                    <Typography variant="h6"> {/* Adjust the variant as needed */}
                         Romantic Comedy
                     </Typography>
                 </Box>
