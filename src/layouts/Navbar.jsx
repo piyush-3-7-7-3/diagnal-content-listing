@@ -62,7 +62,7 @@ const Navbar = ({ movies, handleSetFilteredMovies }) => {
     return (
         <>
             {/* Navbar */}
-            <nav className={`${isNavbarActive ? '' : 'hidden'}`} style={{ display: 'flex' }}>
+            <nav className={`navbar ${isNavbarActive ? '' : 'hidden'}`} style={{ display: 'flex' }}>
                 <IconButton className="nav-button back-button" onClick={handleBack}>
                     <img
                         src={backImage}
@@ -80,7 +80,15 @@ const Navbar = ({ movies, handleSetFilteredMovies }) => {
                         alignItems: 'center'
                     }}
                 >
-                    <Typography variant="h6"> {/* Adjust the variant as needed */}
+                    <Typography sx={{
+                        fontSize: {
+                            xs: '0.7rem',  
+                            sm: '1rem', 
+                            md: '1.2rem',
+                            lg: '1.4rem' 
+                        },   
+                        width: '100%'          
+                    }}> {/* Adjust the variant as needed */}
                         Romantic Comedy
                     </Typography>
                 </Box>
