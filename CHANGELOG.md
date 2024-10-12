@@ -19,15 +19,15 @@ A single-page application (SPA) designed for searching movies efficiently, utili
 
 To run the Movie Search SPA locally:
 
-1. Clone the repository from [GitHub](https://github.com/yourusername/moviesearchspa).
+1. Clone the repository from [GitHub](https://github.com/piyush-3-7-7-3/diagnal-content-listing.git).
 2. Navigate to the project directory.
 3. Run `npm install` to install dependencies.
 4. Start the application using `npm start`.
 
 ## Hosted
-This application is hosted on GitHub Pages. You can access it [here](https://yourusername.github.io/moviesearchspa).
+This application is hosted on GitHub Pages. You can access it [here](https://piyush-3-7-7-3.github.io/diagnal-content-listing/).
 
 ## Acknowledgements
 
-This project was developed as part of an assessment for Diagnal. Thanks to the Material UI team for their excellent library that contributed to the project's design.
+This project was developed as part of an assessment for Diagnal.
 
