@@ -29,5 +29,5 @@ This application is hosted on GitHub Pages. You can access it [here](https://you
 
 ## Acknowledgements
 
-This project was developed as part of an assessment for Diagnal. Thanks to the Material UI team for their excellent library that contributed to the project's design.
+This project was developed as part of an assessment for Diagnal.
 
