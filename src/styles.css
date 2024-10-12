@@ -3,7 +3,7 @@
 body{
     background-color: #171717;    
     font-family: 'Titillium Web', sans-serif;
-    color: #FFFFFF;
+    color: #FAF9F6;
     overflow: auto;
 }
 
@@ -15,3 +15,16 @@ html {
     width: 0px;  /* Remove scrollbar space */
     background: transparent;  /* Optional: just make scrollbar invisible */
 }
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 300; /* Lighter weight for headings */
+}
+
+p {
+    font-weight: 200; /* Extra light weight for paragraphs */
+}
+
+span {
+    font-weight: 200; /* Extra light weight for paragraphs */
+}
+

@@ -16,7 +16,6 @@ const Navbar = ({ movies, handleSetFilteredMovies }) => {
         const handleScroll = () => {
             if (window.scrollY > 100) {
                 setIsNavbarActive(false);  // Hide navbar when scrolling down
-                console.log("HERE");
             } else {
                 setIsNavbarActive(true);   // Show navbar when scrolling back up
             }
@@ -66,6 +65,11 @@ const Navbar = ({ movies, handleSetFilteredMovies }) => {
                 <button className="nav-button back-button" onClick={handleBack}>
                     <img src={backImage} alt='back' />
                 </button>
+                <div className="page-title">
+                    <h2>
+                        Romantic Comedy
+                    </h2>
+                </div>
                 <form className='form' onSubmit={handleSearch}>
                     <input
                         type="text"
