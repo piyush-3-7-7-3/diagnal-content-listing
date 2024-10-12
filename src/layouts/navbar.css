@@ -8,6 +8,16 @@
     color: white; /* Text color */
 }
 
+.form{
+    display: flex;
+    width: 100%;
+    justify-content: space-between; /* Space between buttons and search bar */
+    align-items: center; /* Center items vertically */
+    background-color: transparent; /* Navbar background color */
+    padding: 10px 20px; /* Padding for the navbar */
+    color: white; /* Text color */
+}
+
 .search-input {
     width: 100%; /* Fixed width for the input */
     background-color: transparent;
