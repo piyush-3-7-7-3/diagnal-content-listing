@@ -29,7 +29,8 @@ const MovieCard = memo(({ name, posterImage }) => {
                         textOverflow: 'ellipsis',    
                         display: 'block',             
                         width: '100%',  
-                        marginTop: 1             
+                        marginTop: 1,
+                        marginBottom: 10             
                     }}
                 >
                     <Highlighter

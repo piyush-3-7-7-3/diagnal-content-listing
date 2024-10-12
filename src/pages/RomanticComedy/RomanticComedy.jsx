@@ -3,15 +3,17 @@ import { useState, useEffect, useContext } from 'react';
 import fetchRomanticComedies from "../../services/fetchRomanticComedies";
 import hasMoreItems from "../../utils/hasMoreItems";
 import { SearchContext } from "../../context/SearchContext";
+import Grid from '@mui/material/Grid2';
+import { Skeleton } from "@mui/material";
 
 
-const RomanticComedy = ({handleSetMovies, filteredMovies, handleSetFilteredMovies}) => {
+const RomanticComedy = ({ handleSetMovies, filteredMovies, handleSetFilteredMovies }) => {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
-    const {searchTerm} = useContext(SearchContext);
+    const { searchTerm } = useContext(SearchContext);
 
     useEffect(() => {
         const getMovies = async () => {
@@ -28,16 +30,16 @@ const RomanticComedy = ({handleSetMovies, filteredMovies, handleSetFilteredMovie
                     const moreItems = hasMoreItems(totalContentItems, pageSizeRequested, page);
                     setHasMore(moreItems);
                     handleSetMovies((prev) => [...prev, ...content]);
-                    if(searchTerm != ""){
+                    if (searchTerm != "") {
                         let filteredContent = content.filter((movie) => {
                             return movie.name.toLowerCase().includes(searchTerm.toLowerCase())
                         })
                         handleSetFilteredMovies((prev) => [...prev, ...filteredContent]);
                     }
-                    else{
+                    else {
                         handleSetFilteredMovies((prev) => [...prev, ...content]);
                     }
-                    
+
                 } catch (err) {
                     console.log(err)
                     setError('Error in fetching movies');
@@ -78,7 +80,7 @@ const RomanticComedy = ({handleSetMovies, filteredMovies, handleSetFilteredMovie
 
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-    }, [loading]); 
+    }, [loading]);
 
     if (error) return <p>{error}</p>;
 
@@ -86,7 +88,20 @@ const RomanticComedy = ({handleSetMovies, filteredMovies, handleSetFilteredMovie
         <div className="romantic-movie-container">
             <div className="movies">
                 <MoviesContainer movies={filteredMovies} />
-                {loading && <p>Loading....</p>}
+                {loading &&
+                    <Grid container spacing={2} marginX={5} justifyContent="center" alignItems="flex-start">
+                        {Array.from(new Array(12)).map((_, index) => (
+                            <Grid xs={12} sm={6} md={4} key={index}>
+                                <Skeleton
+                                    sx={{ bgcolor: 'grey.800' }}
+                                    variant="rectangular"
+                                    width={300}
+                                    height={400}
+                                />
+                            </Grid>
+                        ))}
+                    </Grid>
+                }
             </div>
         </div>
     );

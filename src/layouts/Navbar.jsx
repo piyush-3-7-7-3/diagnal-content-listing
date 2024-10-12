@@ -7,7 +7,7 @@ import closeImage from '../assets/images/close.png';
 import navbarImage from '../assets/images/navbar.png';
 
 const Navbar = ({ movies, handleSetFilteredMovies }) => {
-    const [searchBool, setSearchBool] = useState(true);
+    const [searchBool, setSearchBool] = useState(false);
     const [isNavbarActive, setIsNavbarActive] = useState(true);
     const { searchTerm, setSearchTerm } = useContext(SearchContext);
 
