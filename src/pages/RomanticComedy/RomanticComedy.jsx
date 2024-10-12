@@ -3,8 +3,7 @@ import { useState, useEffect, useContext } from 'react';
 import fetchRomanticComedies from "../../services/fetchRomanticComedies";
 import hasMoreItems from "../../utils/hasMoreItems";
 import { SearchContext } from "../../context/SearchContext";
-import Grid from '@mui/material/Grid2';
-import { Skeleton } from "@mui/material";
+import Shimmer from "../../components/ui/Shimmer";
 
 
 const RomanticComedy = ({ handleSetMovies, filteredMovies, handleSetFilteredMovies }) => {
@@ -85,25 +84,16 @@ const RomanticComedy = ({ handleSetMovies, filteredMovies, handleSetFilteredMovi
     if (error) return <p>{error}</p>;
 
     return (
-        <div className="romantic-movie-container">
-            <div className="movies">
-                <MoviesContainer movies={filteredMovies} />
-                {loading &&
-                    <Grid container spacing={2} marginX={5} justifyContent="center" alignItems="flex-start">
-                        {Array.from(new Array(12)).map((_, index) => (
-                            <Grid xs={12} sm={6} md={4} key={index}>
-                                <Skeleton
-                                    sx={{ bgcolor: 'grey.800' }}
-                                    variant="rectangular"
-                                    width={300}
-                                    height={400}
-                                />
-                            </Grid>
-                        ))}
-                    </Grid>
-                }
-            </div>
-        </div>
+        <>
+            {!loading ? (
+                // Render movie content when not loading
+                <div className="romantic-movie-container">
+                    <MoviesContainer movies={filteredMovies} />
+                </div>
+            ) : (
+                <Shimmer />
+            )}
+        </>
     );
 };
 
