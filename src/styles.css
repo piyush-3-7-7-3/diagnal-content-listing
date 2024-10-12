@@ -4,4 +4,13 @@ body{
     background-color: #171717;    
     font-family: 'Titillium Web', sans-serif;
     color: #FFFFFF;
+    overflow: auto;
+}
+
+html {
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
 }

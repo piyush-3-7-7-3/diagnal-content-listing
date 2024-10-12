@@ -12,7 +12,7 @@ const MoviesContainer = ({ movies }) => {
     }), [movies, searchTerm])
 
     return (
-        <Grid container rowSpacing={10} spacing={5} marginX={5}>
+        <Grid container rowSpacing={8} spacing={5} marginX={5}>
             {movies.map((movie, index) => {
                 return <Grid size={{ xs: 4, lg: 2 }} key={`${movie.title}-${index}`}>
                     <MovieCard name={movie.name} posterImage={movie['poster-image']} />
