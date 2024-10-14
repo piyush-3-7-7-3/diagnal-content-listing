@@ -13,11 +13,14 @@ import searchImage from '../assets/images/search.png';
 import closeImage from '../assets/images/close.png';
 import navbarImage from '../assets/images/navbar.png';
 
+// Import component for navbar
+import NavbarTitle from '../components/ui/NavbarTitle';
+
 // Import Material-UI components
-import { IconButton, Box, Typography } from '@mui/material';
+import { IconButton } from '@mui/material';
 
 // Define the Navbar component
-const Navbar = ({ movies, handleSetFilteredMovies }) => {
+const Navbar = ({ movies, handleSetFilteredMovies, title }) => {
     const [searchBool, setSearchBool] = useState(false); // State to manage search input visibility
     const [isNavbarActive, setIsNavbarActive] = useState(true); // State to manage navbar visibility
     const { searchTerm, setSearchTerm } = useContext(SearchContext); // Access search context
@@ -48,8 +51,8 @@ const Navbar = ({ movies, handleSetFilteredMovies }) => {
     // Handle search form submission
     const handleSearch = (event) => {
         event.preventDefault();
-        if (searchTerm.length < 3 || searchTerm.length > 10) {
-            alert('Please enter between 3 and 10 characters to search.'); // Alert if search term is invalid
+        if (searchTerm.length < 3 || searchTerm.length > 15) {
+            alert('Please enter between 3 and 15 characters to search.'); // Alert if search term is invalid
             return;
         }
         setSearchBool(true); // Show close button
@@ -82,28 +85,7 @@ const Navbar = ({ movies, handleSetFilteredMovies }) => {
                         style={{ width: '30px', height: '30px' }} // Adjust the size as needed
                     />
                 </IconButton>
-                <Box
-                    className="page-title"
-                    sx={{
-                        flexGrow: 1, // Allow the Box to grow
-                        flexShrink: 0, // Prevent shrinking
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                    }}
-                >
-                    <Typography sx={{
-                        fontSize: {
-                            xs: '0.7rem',
-                            sm: '1rem',
-                            md: '1.2rem',
-                            lg: '1.4rem'
-                        },
-                        width: '100%'
-                    }}> {/* Adjust the variant as needed */}
-                        Romantic Comedy
-                    </Typography>
-                </Box>
+                <NavbarTitle title={title} />
                 <form className='form' onSubmit={handleSearch} style={{ display: 'flex', alignItems: 'center' }}>
                     <input
                         type="text"
@@ -111,7 +93,6 @@ const Navbar = ({ movies, handleSetFilteredMovies }) => {
                         className="search-input"
                         value={searchTerm}
                         onChange={handleChange} // Update search term on input change
-                        minLength={3}
                     />
                     {!searchBool && (
                         <IconButton type='submit' className="nav-button search-button">

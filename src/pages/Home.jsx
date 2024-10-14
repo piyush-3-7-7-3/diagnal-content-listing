@@ -17,7 +17,7 @@ const Home = () => {
 
     return (
         <SearchProvider>
-            <Navbar movies={movies} handleSetFilteredMovies={setFilteredMovies}/>
+            <Navbar movies={movies} handleSetFilteredMovies={setFilteredMovies} title="Romantic Comedy"/>
             <RomanticComedy handleSetMovies={setMovies} filteredMovies={filteredMovies} handleSetFilteredMovies={setFilteredMovies}/>
         </SearchProvider>
     );
