@@ -15,6 +15,7 @@ import navbarImage from '../assets/images/navbar.png';
 
 // Import component for navbar
 import NavbarTitle from '../components/ui/NavbarTitle';
+import Suggestion from '../components/ui/Suggestion';
 
 // Import Material-UI components
 import { IconButton } from '@mui/material';
@@ -24,6 +25,8 @@ const Navbar = ({ movies, handleSetFilteredMovies, title }) => {
     const [searchBool, setSearchBool] = useState(false); // State to manage search input visibility
     const [isNavbarActive, setIsNavbarActive] = useState(true); // State to manage navbar visibility
     const { searchTerm, setSearchTerm } = useContext(SearchContext); // Access search context
+    const [suggestions, setSuggestions] = useState([]); // State to hold autocomplete suggestions
+    const [showSuggestions, setShowSuggestions] = useState(false); // State to toggle suggestion list visibility
 
     // Handle scroll event using useEffect to avoid multiple event listeners
     useEffect(() => {
@@ -56,6 +59,8 @@ const Navbar = ({ movies, handleSetFilteredMovies, title }) => {
             return;
         }
         setSearchBool(true); // Show close button
+
+        setShowSuggestions(false); // Hide suggestions when search is submitted
         handleSetFilteredMovies(movies.filter((movie) => {
             return movie.name.toLowerCase().includes(searchTerm.toLowerCase()); // Filter movies based on search term
         }));
@@ -66,12 +71,43 @@ const Navbar = ({ movies, handleSetFilteredMovies, title }) => {
         event.preventDefault();
         setSearchTerm(""); // Clear search term
         setSearchBool(false); // Hide close button
+        setSuggestions([]); // Clear suggestions
         handleSetFilteredMovies(movies); // Reset filtered movies to original
     };
 
     // Handle changes in the search input
     const handleChange = (event) => {
-        setSearchTerm(event.target.value); // Update search term state
+        const input = event.target.value;
+        setSearchTerm(input); // Update search term state
+
+        if (input.length === 0) {
+            setSearchBool(false); // Hide close button
+            setSuggestions([]); // Clear suggestions
+            handleSetFilteredMovies(movies); // Reset filtered movies to original
+        }
+
+        // Filter suggestions based on search input
+        if (input.length >= 1) {
+            const filteredSuggestions = movies
+                .filter((movie) => movie.name.toLowerCase().includes(input.toLowerCase()))
+                .slice(0, 5); // Limit to top 5 suggestions
+
+            setSuggestions(filteredSuggestions); // Update suggestions
+            setShowSuggestions(true); // Show suggestions
+        } else {
+            setSuggestions([]); // Clear suggestions if input is less than 3 characters
+            setShowSuggestions(false); // Hide suggestions
+        }
+    };
+
+    // Handle selecting a suggestion
+    const handleSuggestionClick = (suggestion) => {
+        setSearchTerm(suggestion.name); // Set search term to the selected suggestion
+        setShowSuggestions(false); // Hide suggestions
+        handleSetFilteredMovies(movies.filter((movie) => {
+            return movie.name.toLowerCase().includes(searchTerm.toLowerCase()); // Filter movies based on search term
+        }));
+        setSearchBool(true);
     };
 
     return (
@@ -86,7 +122,7 @@ const Navbar = ({ movies, handleSetFilteredMovies, title }) => {
                     />
                 </IconButton>
                 <NavbarTitle title={title} />
-                <form className='form' onSubmit={handleSearch} style={{ display: 'flex', alignItems: 'center' }}>
+                <form className='form' onSubmit={handleSearch} style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
                     <input
                         type="text"
                         placeholder="Search..."
@@ -115,6 +151,11 @@ const Navbar = ({ movies, handleSetFilteredMovies, title }) => {
                 </form>
             </nav>
 
+            {/* Autocomplete Dropdown */}
+            {showSuggestions && suggestions.length > 0 && (
+                <Suggestion suggestions={suggestions} handleSuggestionClick={handleSuggestionClick} />
+            )}
+
             {/* Scroll Placeholder */}
             <div className={`scroll-placeholder ${!isNavbarActive ? 'visible' : ''}`}>
                 {/* You can display an image or another element here */}
@@ -122,7 +163,7 @@ const Navbar = ({ movies, handleSetFilteredMovies, title }) => {
             </div>
         </>
     );
-}
+};
 
 // Export the Navbar component
 export default Navbar;
