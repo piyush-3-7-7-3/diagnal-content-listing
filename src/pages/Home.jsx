@@ -13,7 +13,7 @@ import RomanticComedy from "./RomanticComedy/RomanticComedy";
 // Define the Home component
 const Home = () => {
     const [movies, setMovies] = useState([]);
-    const [filteredMovies, setFilteredMovies] = useState([]);
+    const [filteredMovies, setFilteredMovies] = useState(movies);
 
     return (
         <SearchProvider>

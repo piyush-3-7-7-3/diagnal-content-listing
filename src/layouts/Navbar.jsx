@@ -21,12 +21,14 @@ import Suggestion from '../components/ui/Suggestion';
 import { IconButton } from '@mui/material';
 
 // Define the Navbar component
+// Define the Navbar component
 const Navbar = ({ movies, handleSetFilteredMovies, title }) => {
     const [searchBool, setSearchBool] = useState(false); // State to manage search input visibility
     const [isNavbarActive, setIsNavbarActive] = useState(true); // State to manage navbar visibility
     const { searchTerm, setSearchTerm } = useContext(SearchContext); // Access search context
     const [suggestions, setSuggestions] = useState([]); // State to hold autocomplete suggestions
     const [showSuggestions, setShowSuggestions] = useState(false); // State to toggle suggestion list visibility
+    const [isSearchActive, setIsSearchActive] = useState(false); // state to manage search active state
 
     // Handle scroll event using useEffect to avoid multiple event listeners
     useEffect(() => {
@@ -46,24 +48,20 @@ const Navbar = ({ movies, handleSetFilteredMovies, title }) => {
         };
     }, []); // Empty dependency array ensures it runs once when the component mounts
 
-    // Handle back navigation
-    const handleBack = () => {
-        window.history.back(); // Go back to the previous page
-    };
-
     // Handle search form submission
     const handleSearch = (event) => {
         event.preventDefault();
-        if (searchTerm.length < 3 || searchTerm.length > 15) {
+        if (isSearchActive && (searchTerm.length < 3 || searchTerm.length > 15)) {
             alert('Please enter between 3 and 15 characters to search.'); // Alert if search term is invalid
             return;
         }
         setSearchBool(true); // Show close button
-
+        setIsSearchActive(true); // Activate the search box (hide title)
         setShowSuggestions(false); // Hide suggestions when search is submitted
         handleSetFilteredMovies(movies.filter((movie) => {
             return movie.name.toLowerCase().includes(searchTerm.toLowerCase()); // Filter movies based on search term
         }));
+
     };
 
     // Handle closing the search input
@@ -71,6 +69,7 @@ const Navbar = ({ movies, handleSetFilteredMovies, title }) => {
         event.preventDefault();
         setSearchTerm(""); // Clear search term
         setSearchBool(false); // Hide close button
+        setIsSearchActive(false); // Deactivate the search box (show title)
         setSuggestions([]); // Clear suggestions
         handleSetFilteredMovies(movies); // Reset filtered movies to original
     };
@@ -84,6 +83,11 @@ const Navbar = ({ movies, handleSetFilteredMovies, title }) => {
             setSearchBool(false); // Hide close button
             setSuggestions([]); // Clear suggestions
             handleSetFilteredMovies(movies); // Reset filtered movies to original
+            setIsSearchActive(false); // Deactivate the search box (show title)
+        } else {
+            handleSetFilteredMovies(movies.filter((movie) => {
+                return movie.name.toLowerCase().includes(input.toLowerCase()); // Filter movies based on search term
+            }));
         }
 
         // Filter suggestions based on search input
@@ -113,29 +117,33 @@ const Navbar = ({ movies, handleSetFilteredMovies, title }) => {
     return (
         <>
             {/* Navbar */}
-            <nav className={`navbar ${isNavbarActive ? '' : 'hidden'}`} style={{ display: 'flex' }}>
-                <IconButton className="nav-button back-button" onClick={handleBack}>
-                    <img
-                        src={backImage}
-                        alt='back'
-                        style={{ width: '30px', height: '30px' }} // Adjust the size as needed
-                    />
-                </IconButton>
-                <NavbarTitle title={title} />
-                <form className='form' onSubmit={handleSearch} style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
-                    <input
-                        type="text"
-                        placeholder="Search..."
-                        className="search-input"
-                        value={searchTerm}
-                        onChange={handleChange} // Update search term on input change
-                    />
+            <nav className={`navbar ${isNavbarActive ? '' : 'hidden'}`} >
+                {!isSearchActive && <NavbarTitle title={title} />} {/* Hide the title when search is active */}
+                <form className='form' onSubmit={handleSearch} >
+                    {isSearchActive && (
+                        <IconButton className="nav-button back-button" onClick={handleClose}>
+                            <img
+                                src={backImage}
+                                alt='back'
+                                style={{ width: '20px', height: '20px' }} // Adjust the size as needed
+                            />
+                        </IconButton>)}
+                    {isSearchActive && ( // Show input only when search is active
+                        <input
+                            type="text"
+                            placeholder="Search..."
+                            className="search-input"
+                            value={searchTerm}
+                            onChange={handleChange}
+                        />
+                    )}
+
                     {!searchBool && (
-                        <IconButton type='submit' className="nav-button search-button">
+                        <IconButton style={{ paddingLeft: '85%' }} type='submit' className="nav-button search-button">
                             <img
                                 src={searchImage}
                                 alt='search'
-                                style={{ width: '30px', height: '30px' }} // Adjust the size as needed
+                                style={{ width: '20px', height: '20px' }} // Adjust the size as needed
                             />
                         </IconButton>
                     )}
@@ -144,7 +152,7 @@ const Navbar = ({ movies, handleSetFilteredMovies, title }) => {
                             <img
                                 src={closeImage}
                                 alt='close'
-                                style={{ width: '30px', height: '30px' }} // Adjust the size as needed
+                                style={{ width: '20px', height: '20px' }} // Adjust the size as needed
                             />
                         </IconButton>
                     )}
@@ -164,6 +172,7 @@ const Navbar = ({ movies, handleSetFilteredMovies, title }) => {
         </>
     );
 };
+
 
 // Export the Navbar component
 export default Navbar;

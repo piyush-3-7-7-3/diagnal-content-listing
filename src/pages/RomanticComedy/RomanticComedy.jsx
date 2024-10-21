@@ -99,7 +99,7 @@ const RomanticComedy = ({ handleSetMovies, filteredMovies, handleSetFilteredMovi
             {!loading ? (
                 // Render movie content when not loading
                 <div className="romantic-movie-container">
-                    <MoviesContainer movies={filteredMovies} /> {/* Render MoviesContainer with filtered movies */}
+                    <MoviesContainer filteredMovies={filteredMovies} /> {/* Render MoviesContainer with filtered movies */}
                 </div>
             ) : (
                 <Shimmer /> // Show loading animation while fetching
